@@ -5,7 +5,11 @@ This code uses Bayesian methods to estimate the natural rate of interest (r*) us
 ## Executing the code
 Cloning the repository and running the MATLAB script `estimateModel.m` will produce estimates of the unobserved series for the natural rate of interest ( *r*\* ), the longer-run natural rate of interest ( *r*\*<sub>*LR*</sub> ), potential output ( *y*<sup>*P*</sup> ), the growth rate of potential output ( *g* ) and the non-growth component of the natural rate ( *z* ).  Relevant percentiles from the posterior estimates of these objects will be in the structure `outVals` when the estimation completes, and two files will be generated in the `data\output` folder containing the filtered and smoothed estimates from `outVals`.
 
-## Description of output
+## .mat file output
+
+The `estimateModel.m` script will generate two .mat files which will both be sizeable.  The first will be called `AltModel_YYYYMMDD_HHMMSS.mat` (if the `baseAlt` variable is left set to 1) where the date and time in the filename are specified by the time the script is executed.  This file will have a structure in it called `res`, which will contain the data and the posterior draws of the model's parameters.  The second file will have the same name, with `_outVals` added to the end of the file name.  This file will contain the data and parameter draws, but also all of the draws of the unobserved variables implied by the filter, as well as time series paths of those unobserved objects based on percentiles specified in the code.
+
+## Description of `outVals` output
 The structure `outVals` has the following components, several of which are duplicates from the input data.  Note that below there are *T* periods, *M* draws from the posterior, *K* parameters, *N*<sub>*y*</sub> observable series, *N*<sub>*u*</sub> exogenous series, *N*<sub>*S*</sub> elements in the state vector, and *PP* is the number of percentiles shown in the posterior paths which aggregate up in the information from the posterior draws (these are originally the 2.5, 5, 16, 50, 84, 95, and 97.5 percentiles). 
 
 |Field Name | Description | 

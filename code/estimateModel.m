@@ -1,4 +1,5 @@
-% To run as a replication of the FEDS Note output for 2018Q3 using the original .
+% To run a replication of the output in the files in data\output use this cede.  Otherwise leave
+% it commented out.
 jid = '10147376';
 Wid = '1';
 cede = str2double(strcat(jid, Wid));
@@ -11,8 +12,8 @@ outDataDir = '../data/output';
 baseAlt = 1 % 0 = base, 1 = alt
 
 %% MAT file output.
-%% This cannot be a relative reference, it must be direct because the file generated
-%% will be multiple GBs and we can't risk dropping it into a home or production folder
+%% This cannot be a relative reference, it must be direct because the files generated
+%% will be large and we can't risk dropping it into a home or production folder
 %% on the server it is run on.
 if ispc
     matOutDir = 'C:/scratch/';
@@ -338,7 +339,20 @@ sFileName = strcat(nameFile,exten);
 sf = fullfile(matOutDir,sFileName);
 save(sf,'-v7.3')
 
-disp('Results .mat file saved with RES structure.');
+disp('Smaller results .mat file saved with RES structure.');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% 
+%%%%% FROM HERE DOWN CAN BE RUN SEPERATELY STARTING FROM THE SMALLER RESULTS .MAT FILE TO
+%%%%% GENERATE THE ESTIMATES OF THE UNOBSERVED VARIABLES.  THE SMALLER RESULTS .MAT FILE HAS THE
+%%%%% DATA AND THE DRAWS FROM THE POSTERIOR, SO THEY CAN BE RUN THROUGH THE FILTER PROGRAM USING
+%%%%% THIS CODE AND GENERATE THE UNOBSERVED COMPONENTS WITHOUT RUNNING THE ESTIMATION AGAIN.
+%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Here we will always assume that we want both the filtered and the
 % smoothed output
@@ -589,6 +603,6 @@ outVals.BF = priorPdf/postPdf;
 sFileName = strcat(nameFile,'_outVals',exten);
 sf2 = fullfile(matOutDir,sFileName);
 save(sf2,'-v7.3')
-disp('Results .mat file saved with OUTVALS structure.');
+disp('Larger results .mat file saved with OUTVALS structure.');
 
 disp('Script complete.')

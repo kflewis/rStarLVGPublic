@@ -18,8 +18,7 @@ baseAlt = 1 % 0 = base, 1 = alt
 if ispc
     matOutDir = 'C:/scratch/';
 else
-    %matOutDir = '/scratch/';
-    matOutDir = '/fst/scratch-m1kfl00/rStarPublic/';
+    matOutDir = '/scratch/';
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
